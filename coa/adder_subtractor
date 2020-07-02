@@ -1,0 +1,231 @@
+Exercise#1: Design half adder in data flow style of modeling.
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+entity Lab3_1 is
+    Port ( a : in  STD_LOGIC;
+           b : in  STD_LOGIC;
+           s : out  STD_LOGIC;
+           c : out  STD_LOGIC);
+end Lab3_1;
+architecture DataFlow of Lab3_1 is
+
+begin
+
+s <= a xor b;
+c <= a and b;
+
+end DataFlow; 
+
+Test Code:
+
+
+-- Stimulus process
+   stim_proc: process
+   begin		
+      -- hold reset state for 100 ns.
+		a<='0'; b<='0'; s<='0'; c<='0';
+      wait for 100 ns;	
+		a<='0'; b<='1'; s<='1'; c<='0';
+      wait for 100 ns;
+		a<='1'; b<='0'; s<='1'; c<='0';
+      wait for 100 ns;
+		a<='1'; b<='1'; s<='0'; c<='1';
+      wait for 100 ns;
+       -- insert stimulus here
+
+      wait;
+   end process;
+
+
+
+
+
+
+
+
+
+
+Exercise#2: Design half subtractor in behavioral style (using either if-then or case when) of
+Modelling.
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity Lab3_2 is
+    Port ( a : in  STD_LOGIC;
+           b : in  STD_LOGIC;
+           d : out  STD_LOGIC;
+           bo : out  STD_LOGIC);
+end Lab3_2;
+architecture Behavioral of Lab3_2 is
+begin
+process(a,b)
+
+begin
+
+if (a='0' and b='0') then
+d <= a xor b;
+bo <= not a and b;
+elsif (a='0' and b='1') then
+d <= a xor b;
+bo <= not a and b;
+elsif (a='1' and b='0') then
+d <= a xor b;
+bo <= not a and b;
+else
+d <= a xor b;
+bo <= not a and b; 
+
+end if;
+end process;
+end Behavioral;
+
+Test Code:
+stim_proc: process
+   begin		
+      -- hold reset state for 100 ns.
+		a<='0'; b<='0'; d<='0'; bo<='0';
+      wait for 100 ns;	
+
+		a<='0'; b<='1'; d<='1'; bo<='1'; 
+      wait for 100 ns;
+		a<='1'; b<='0'; d<='1'; bo<='0';
+      wait for 100 ns;
+		a<='1'; b<='1'; d<='0'; bo<='0';
+      wait for 100 ns;
+      -- insert stimulus here
+
+      wait;
+   end process;
+
+Exercise#3: Design full subtractor (shown in Figure 4) using two half subtractors in structural
+style of modelling.
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+entity Lab3_3_171B039 is
+    Port ( a : in  STD_LOGIC;
+           b : in  STD_LOGIC;
+           c : in  STD_LOGIC;
+           d : out  STD_LOGIC;
+           br : out  STD_LOGIC);
+end Lab3_3_171B039;
+architecture Structural of Lab3_3_171B039 is
+signal d1, b1, b2 : std_logic;
+component Lab3_2
+port (a, b : in std_logic;
+d, bo : out std_logic);
+end component ;
+
+begin
+
+HS1: Lab3_2 port map (b, c, d1, b1);
+HS2: Lab3_2 port map (a, d1, d, b2);
+br <= b1 or b2;
+end Structural ; 
+
+Test Code:
+stim_proc: process
+
+   begin		
+      -- hold reset state for 100 ns.
+		a<='0'; b<='0'; c<='0'; d<='0'; br<='0';
+      wait for 100 ns;
+		a<='0'; b<='0'; c<='1'; d<='1'; br<='1';
+      wait for 100 ns;	
+		a<='0'; b<='1'; c<='0'; d<='1'; br<='1';
+      wait for 100 ns;	
+		a<='0'; b<='1'; c<='1'; d<='0'; br<='1';
+      wait for 100 ns;	
+		a<='1'; b<='0'; c<='0'; d<='1'; br<='0';
+      wait for 100 ns;	
+		a<='1'; b<='0'; c<='1'; d<='0'; br<='0';
+      wait for 100 ns;	
+a<='1'; b<='1'; c<='0'; d<='0'; br<='0'; 
+      wait for 100 ns;	
+		a<='1'; b<='1'; c<='1'; d<='1'; br<='1';
+      wait for 100 ns;	
+
+      -- insert stimulus here
+
+      wait;
+   end process;
+Exercise#4: Design gate level logic diagram of full adder (shown in Figure 3) in structural style
+of modelling.
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity Lab3_4_171B039 is
+    Port ( a : in  STD_LOGIC;
+           b : in  STD_LOGIC;
+           c : in  STD_LOGIC;
+           s : out  STD_LOGIC;
+           ca : out  STD_LOGIC);
+end Lab3_4_171B039;
+
+architecture Structural of Lab3_4_171B039 is
+
+signal s1, c1, c2 : std_logic;
+
+component AND_AND
+port (a, b : in std_logic;
+c1 : out std_logic);
+end component ;
+
+component or_or
+port (a, b : in std_logic;
+c : out std_logic);
+end component ;
+
+component XOR_XOR
+port (a, b : in std_logic;
+s1 : out std_logic);
+end component ;
+
+
+begin
+
+
+XOR_1: XOR_XOR PORT MAP(a,b,s1);
+XOR_2: XOR_XOR PORT MAP(c,s1,s);
+AND_1: AND_AND PORT MAP(c,s1,c1);
+AND_2: AND_AND PORT MAP(a,b,c2);
+OR_1: or_or PORT MAP(c1,c2,ca);
+
+end Structural ;
+
+
+
+
+
+
+
+
+Test Code:
+
+-- Stimulus process
+   stim_proc: process
+   begin		
+      -- hold reset state for 100 ns.
+      a<='0'; b<='0'; c<='0'; s<='0'; ca<='0';
+      wait for 100 ns;
+		a<='0'; b<='0'; c<='1'; s<='1'; ca<='0';
+      wait for 100 ns;	
+		a<='0'; b<='1'; c<='0'; s<='1'; ca<='0';
+      wait for 100 ns;	
+		a<='0'; b<='1'; c<='1'; s<='0'; ca<='1';
+      wait for 100 ns;	
+		a<='1'; b<='0'; c<='0'; s<='1'; ca<='0';
+      wait for 100 ns;	
+		a<='1'; b<='0'; c<='1'; s<='0'; ca<='1';
+      wait for 100 ns;	
+		a<='1'; b<='1'; c<='0'; s<='0'; ca<='1';
+      wait for 100 ns;	
+		a<='1'; b<='1'; c<='1'; s<='1'; ca<='1';
+      wait for 100 ns;	
+
+      wait;
+   end process;
