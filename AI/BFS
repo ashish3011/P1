@@ -1,0 +1,38 @@
+class Graph:
+
+    def __init__(self,initial,goal):
+        self.initial = initial
+        self.goal = goal
+    
+    def successor(self,state):
+        connectivity = {
+            1: [2,5,],
+            2: [3,],
+            3: [4,7,],
+            4: [8,],
+            5: [6,9,],
+            6: [7,10,],
+            7: [11,],
+            8: [7,12,],
+            9: [10,],
+            10: [11,],
+            11: [],
+            12: [],
+        }
+        return connectivity.get(state)
+    
+    def goal_test(self,state):
+        return state == self.goal
+    
+    def path_cost(self,c,state1,action,state2):
+        return c+1
+
+queue = []
+problem_object = Graph(1,12)
+queue.append(1)
+
+while queue[0]!=problem_object.goal:
+    for nodes in problem_object.successor(queue[0]):
+        if nodes not in queue:
+            queue.append(nodes)
+    print(queue.pop(0))
