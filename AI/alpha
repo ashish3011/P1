@@ -1,0 +1,40 @@
+MAX, MIN = 10000, -10000 
+ 
+def minimax(depth, nodeIndex, maximizingPlayer,  values, alpha, beta):  
+   
+    if depth == 3:  
+        return values[nodeIndex]  
+  
+    if maximizingPlayer:  
+       
+        bestVal = MIN 
+  
+        for i in range(0, 2):  
+              
+            value = minimax(depth + 1, nodeIndex * 2 + i, False, values, alpha, beta)  
+            bestVal = max(bestVal, value)  
+            alpha = max(alpha, bestVal)  
+   
+            if beta <= alpha:  
+                break 
+           
+        return bestVal  
+       
+    else: 
+        bestVal = MAX 
+   
+        for i in range(0, 2):  
+           
+            value = minimax(depth + 1, nodeIndex * 2 + i,  True, values, alpha, beta)  
+            bestVal = min(bestVal, value)  
+            beta = min(beta, bestVal)  
+   
+            if beta <= alpha:  
+                break 
+           
+        return bestVal  
+        
+if __name__ == "__main__":  
+   
+    values = [2,7,8,1,5,2,9,5]   
+    print("optimal value :", minimax(0, 0, True, values, MIN, MAX))  
