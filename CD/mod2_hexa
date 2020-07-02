@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(void)
+{
+    string q0,q1;
+    string curr="q0";
+    string f="q0";
+    string str;
+    cout<<"Enter the string"<<endl;
+    cin>>str;
+    cout<<"q0 -> ";
+    for(int i=0; str[i]!=0; i++)
+    {
+        cout<<str[i]<<" ->";
+        if(int(str[i]) == 48 || int(str[i]) == 49 || int(str[i]) == 50 || int(str[i]) == 51 || int(str[i]) == 52 || int(str[i]) == 53 || int(str[i]) == 54 || int(str[i]) == 55 || int(str[i]) == 56 || int(str[i]) == 57 || int(str[i]) == 65 || int(str[i]) == 66 || int(str[i]) == 67 || int(str[i]) == 68 || int(str[i]) == 69 || int(str[i]) == 70 || int(str[i]) == 97 || int(str[i]) == 98 || int(str[i]) == 99 || int(str[i]) == 100 || int(str[i]) == 101 || int(str[i]) == 102)
+        {
+
+        if(int(str[i]) == 48 || int(str[i]) == 50 || int(str[i]) == 52 || int(str[i]) == 54 || int(str[i]) == 56 || int(str[i]) == 65 || int(str[i]) == 97 || int(str[i]) == 67 || int(str[i]) == 99 || int(str[i]) == 69 || int(str[i]) == 101 && curr == "q0")
+        {
+            cout<<"q0  ";
+            curr="q0";
+        }
+        else if(int(str[i]) == 49 || int(str[i]) == 51 || int(str[i]) == 53 || int(str[i]) == 55 || int(str[i]) == 57 || int(str[i]) == 66 || int(str[i]) == 68 || int(str[i]) == 70 || int(str[i]) == 98 || int(str[i]) == 100 || int(str[i]) == 102 && curr == "q0")
+        {
+            cout<<"q1 ";
+            curr="q1";
+        }
+        else if(int(str[i]) == 48 || int(str[i]) == 50 || int(str[i]) == 52 || int(str[i]) == 54 || int(str[i]) == 56 || int(str[i]) == 65 || int(str[i]) == 97 || int(str[i]) == 67 || int(str[i]) == 99 || int(str[i]) == 69 || int(str[i]) == 101 && curr == "q1")
+        {
+            cout<<"q0 ";
+            curr="q0";
+        }
+         else if(int(str[i]) == 49 || int(str[i]) == 51 || int(str[i]) == 53 || int(str[i]) == 55 || int(str[i]) == 57 || int(str[i]) == 66 || int(str[i]) == 68 || int(str[i]) == 70 || int(str[i]) == 98 || int(str[i]) == 100 || int(str[i]) == 102 && curr == "q1")
+        {
+            cout<<"q1 ";
+            curr="q1";
+        }
+        cout<<"->";
+        }
+        else
+        {
+            cout<<"String Rejected";
+            return 0;
+        }
+    }
+    if(curr==f)
+    {
+        cout<<"String accepted";
+    }
+    else
+    {
+        cout<<"String rejected";
+    }
+    return 0;
+}
