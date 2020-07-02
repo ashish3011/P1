@@ -1,0 +1,177 @@
+Exercise#1: Design two inputs and five outputs All-in-One logic gate circuit shown in Fig.1. Write the
+VHDL code in data flow style of modelling.
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+entity Lab2_a is
+Port ( a : in STD_LOGIC;
+b : in STD_LOGIC;
+c : out STD_LOGIC;
+d : out STD_LOGIC;
+e : out STD_LOGIC;
+f : out STD_LOGIC;
+g : out STD_LOGIC);
+end Lab2_a;
+architecture DataFlow of Lab2_a is
+begin
+c <= not a;
+d <= a and b;
+e <= a or b;
+f <= a nand b;
+g <= a xor b;
+end DataFlow;
+
+Test Code
+stim_proc: process
+begin
+-- hold reset state for 100 ns.
+a<='0';b<='0';
+wait for 100 ns;
+a<='0';b<='1';
+wait for 100 ns;
+a<='1';b<='0';
+wait for 100 ns;
+a<='1';b<='1';
+wait for 100 ns;
+-- insert stimulus here
+wait;
+end process;
+Exercise#2: Design two inputs and one output All-in-One logic gate diagram shown in Fig.2. Write the
+VHDL code in behavioural style of modelling using (i) if-then-else (ii) case-when.
+
+CASE (I):
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+entity Lab2_b is
+Port ( a : in STD_LOGIC;
+b : in STD_LOGIC;
+x : in STD_LOGIC;
+y : in STD_LOGIC;
+c : out STD_LOGIC);
+end Lab2_b;
+architecture Behavioral of Lab2_b is
+begin
+process(a,b,x,y)
+begin
+if (x='0' and y='0') then
+c <= a and b ;
+elsif (x='0' and y='1') then
+c <= a or b ;
+elsif (x='1' and y='0') then
+c <= a nor b ;
+else
+c <= a nand b ;
+end if;
+end process;
+end Behavioral;
+Test Code
+stim_proc: process
+begin
+-- hold reset state for 100 ns.
+
+a<='0'; b<='0'; x<='0';
+y<='0';
+wait for 100 ns;
+a<='0'; b<='0'; x<='0';
+y<='1';
+wait for 100 ns;
+a<='0'; b<='0'; x<='1';
+y<='0';
+wait for 100 ns;
+a<='0'; b<='0'; x<='1';
+y<='1';
+wait for 100 ns;
+a<='0'; b<='1'; x<='0';
+y<='0';
+wait for 100 ns;
+
+a<='0'; b<='1'; x<='0'; y<='1';
+wait for 100 ns;
+a<='0'; b<='1'; x<='1'; y<='0';
+wait for 100 ns;
+a<='0'; b<='1'; x<='1'; y<='1';
+wait for 100 ns;
+a<='1'; b<='0'; x<='0'; y<='0';
+
+wait for 100 ns;
+a<='1'; b<='0'; x<='0'; y<='1';
+wait for 100 ns;
+a<='1'; b<='0'; x<='1'; y<='0';
+wait for 100 ns;
+a<='1'; b<='0'; x<='1'; y<='1';
+wait for 100 ns;
+a<='1'; b<='1'; x<='0'; y<='0';
+wait for 100 ns;
+a<='1'; b<='1'; x<='0'; y<='1';
+wait for 100 ns;
+a<='1'; b<='1'; x<='1'; y<='0';
+wait for 100 ns;
+a<='1'; b<='1'; x<='1'; y<='1';
+wait for 100 ns;
+wait;
+end process;
+CASE (II)
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+entity Lab2_b_2 is
+Port ( a : in STD_LOGIC;
+b : in STD_LOGIC;
+x : in STD_LOGIC;
+y : in STD_LOGIC;
+c : out STD_LOGIC);
+end Lab2_b_2;
+architecture Behavioral of Lab2_b_2 is
+begin
+process (x,y,a,b)
+variable i : std_logic_vector(1 downto 0);
+begin
+i:= x & y;
+case i is
+when "00" =>
+c <= a and b;
+when "01" =>
+c <= a or b;
+when "10" =>
+c <= a nor b;
+when others =>
+c <= a nand b;
+end case;
+end process;
+
+end Behavioral;
+Test Code
+begin
+-- hold reset state for 100 ns.
+a<='0'; b<='0'; x<='0'; y<='0';
+wait for 100 ns;
+a<='0'; b<='0'; x<='0'; y<='1';
+wait for 100 ns;
+a<='0'; b<='0'; x<='1'; y<='0';
+wait for 100 ns;
+a<='0'; b<='0'; x<='1'; y<='1';
+wait for 100 ns;
+a<='0'; b<='1'; x<='0'; y<='0';
+
+wait for 100 ns;
+a<='0'; b<='1'; x<='0'; y<='1';
+wait for 100 ns;
+a<='0'; b<='1'; x<='1'; y<='0';
+wait for 100 ns;
+a<='0'; b<='1'; x<='1'; y<='1';
+wait for 100 ns;
+a<='1'; b<='0'; x<='0'; y<='0';
+wait for 100 ns;
+a<='1'; b<='0'; x<='0'; y<='1';
+wait for 100 ns;
+a<='1'; b<='0'; x<='1'; y<='0';
+wait for 100 ns;
+
+a<='1'; b<='0'; x<='1'; y<='1';
+wait for 100 ns;
+a<='1'; b<='1'; x<='0'; y<='0';
+wait for 100 ns;
+a<='1'; b<='1'; x<='0'; y<='1';
+wait for 100 ns;
+a<='1'; b<='1'; x<='1'; y<='0';
+wait for 100 ns;
+a<='1'; b<='1'; x<='1'; y<='1';
+wait for 100 ns;
