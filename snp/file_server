@@ -1,0 +1,40 @@
+#include<sys/socket.h>
+#include<sys/types.h>
+#include<netinet/in.h>
+#include<string.h>
+#include<stdio.h>
+#inclue<fcntl.h>
+int main()
+{
+	time_t ticks;
+	char buff[1024];
+	int sockfd,connfd,fd,n,id;
+	struct sockaddr_in serv;
+	sockfd = socket(AF_INET,SOCK_STREAM,0);
+	if(sockfd<0)
+	{
+		printf("\nSocket Error");
+	}
+	serv.sin_family = AF_INET;
+	serv.sin_port = htons(1290);
+	serv.sin_addr.s_addr = htonl(INADDR_ANY);
+	if((bind(sockfd, (struct sockaddr *)&serv, sizeof(serv))) < 0)
+	{
+		printf("\nbind error");
+	}
+	listen(sockfd,10);
+	for(;;)
+	{
+		connfd = accept(sockfd,(struct sockaddr *)NULL,NULL);
+		while((n=read(connfd,buff,1024))>0)
+		{
+			fd = open(buff,O_RDONLY);
+			while((n = read(fd,buff,1024))>0)
+			{
+				write(connfd,buff,n);
+			}
+		}
+		close(connfd);
+	}
+	return 0;
+}
