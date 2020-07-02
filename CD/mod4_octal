@@ -1,0 +1,135 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(void)
+{
+    string q0,q1,q2,q3,q4;
+    string curr="q4";
+    string f="q0";
+    string str;
+    cout<<"Enter the string"<<endl;
+    cin>>str;
+    cout<<"q0 -> ";
+    for(int i=0; str[i]!=0; i++)
+    {
+        cout<<str[i]<<" ->";
+        if(int(str[i]) == 48 || int(str[i]) == 49 || int(str[i]) == 50 || int(str[i]) == 51 || int(str[i]) == 52 || int(str[i]) == 53 || int(str[i]) == 54 || int(str[i]) == 55)
+        {
+            if(int(str[i]) == 48 || int(str[i]) == 52 && curr == "q4")
+        {
+            cout<<"q0  ";
+            curr="q0";
+        }
+        else if(int(str[i]) == 49 || int(str[i]) == 53 && curr == "q4")
+        {
+            cout<<"q1  ";
+            curr="q1";
+        }
+        else if(int(str[i]) == 50 || int(str[i]) == 54 && curr == "q4")
+        {
+            cout<<"q2  ";
+            curr="q2";
+        }
+        else if(int(str[i]) == 51 || int(str[i]) == 55 && curr == "q4")
+        {
+            cout<<"q3  ";
+            curr="q3";
+        }
+        else if(int(str[i]) == 48 || int(str[i]) == 52 && curr == "q0")
+        {
+            cout<<"q0  ";
+            curr="q0";
+        }
+        else if(int(str[i]) == 49 || int(str[i]) == 53 && curr == "q0")
+        {
+            cout<<"q1  ";
+            curr="q1";
+        }
+        else if(int(str[i]) == 50 || int(str[i]) == 54 && curr == "q0")
+        {
+            cout<<"q2  ";
+            curr="q2";
+        }
+        else if(int(str[i]) == 51 || int(str[i]) == 55 && curr == "q0")
+        {
+            cout<<"q3  ";
+            curr="q3";
+        }
+        else if(int(str[i]) == 48 || int(str[i]) == 52 && curr == "q1")
+        {
+            cout<<"q0  ";
+            curr="q0";
+        }
+        else if(int(str[i]) == 49 || int(str[i]) == 53 && curr == "q1")
+        {
+            cout<<"q1  ";
+            curr="q1";
+        }
+        else if(int(str[i]) == 50 || int(str[i]) == 54 && curr == "q1")
+        {
+            cout<<"q2  ";
+            curr="q2";
+        }
+        else if(int(str[i]) == 51 || int(str[i]) == 55 && curr == "q1")
+        {
+            cout<<"q3  ";
+            curr="q3";
+        }
+        else if(int(str[i]) == 48 || int(str[i]) == 52 && curr == "q2")
+        {
+            cout<<"q0  ";
+            curr="q0";
+        }
+        else if(int(str[i]) == 49 || int(str[i]) == 53 && curr == "q2")
+        {
+            cout<<"q1  ";
+            curr="q1";
+        }
+        else if(int(str[i]) == 50 || int(str[i]) == 54 && curr == "q2")
+        {
+            cout<<"q2  ";
+            curr="q2";
+        }
+        else if(int(str[i]) == 51 || int(str[i]) == 55 && curr == "q2")
+        {
+            cout<<"q3  ";
+            curr="q3";
+        }
+        else if(int(str[i]) == 48 || int(str[i]) == 52 && curr == "q3")
+        {
+            cout<<"q0  ";
+            curr="q0";
+        }
+        else if(int(str[i]) == 49 || int(str[i]) == 53 && curr == "q3")
+        {
+            cout<<"q1  ";
+            curr="q1";
+        }
+        else if(int(str[i]) == 50 || int(str[i]) == 54 && curr == "q3")
+        {
+            cout<<"q2  ";
+            curr="q2";
+        }
+        else if(int(str[i]) == 51 || int(str[i]) == 55 && curr == "q3")
+        {
+            cout<<"q3  ";
+            curr="q3";
+        }
+
+        cout<<" ->";
+        }
+        else
+        {
+            cout<<"String Rejected";
+            return 0;
+        }
+    }
+    if(curr==f)
+    {
+        cout<<"String accepted";
+    }
+    else
+    {
+        cout<<"String rejected";
+    }
+    return 0;
+}
