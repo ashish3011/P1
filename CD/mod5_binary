@@ -1,0 +1,95 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(void)
+{
+    string q0,q1,q2,q3,q4,q5;
+    string curr="q5";
+    string f="q0";
+    string str;
+    cout<<"Enter the string"<<endl;
+    cin>>str;
+    cout<<"q5 -> ";
+    for(int i=0; str[i]!=0; i++)
+    {
+        cout<<str[i]<<" ->";
+        if(int(str[i]) == 48 || int(str[i]) == 49)
+        {
+        if(int(str[i]) == 48 && curr == "q5")
+        {
+            cout<<"q0  ";
+            curr="q0";
+        }
+        else if(int(str[i]) == 49 && curr == "q5")
+        {
+            cout<<"q1 ";
+            curr="q1";
+        }
+
+        else if(int(str[i]) == 48 && curr == "q0")
+        {
+            cout<<"q0  ";
+            curr="q0";
+        }
+        else if(int(str[i]) == 49 && curr == "q0")
+        {
+            cout<<"q1 ";
+            curr="q1";
+        }
+        else if(int(str[i]) == 48 && curr == "q1")
+        {
+            cout<<"q2 ";
+            curr="q2";
+        }
+         else if(int(str[i]) == 49 && curr == "q1")
+        {
+            cout<<"q3 ";
+            curr="q3";
+        }
+        else if(int(str[i]) == 48 && curr == "q2")
+        {
+            cout<<"q4 ";
+            curr="q4";
+        }
+         else if(int(str[i]) == 49 && curr == "q2")
+        {
+            cout<<"q0 ";
+            curr="q0";
+        }
+        else if(int(str[i]) == 48 && curr == "q3")
+        {
+            cout<<"q1 ";
+            curr="q1";
+        }
+        else if(int(str[i]) == 49 && curr == "q3")
+        {
+            cout<<"q2 ";
+            curr="q2";
+        }
+        else if(int(str[i]) == 48 && curr == "q4")
+        {
+            cout<<"q3 ";
+            curr="q3";
+        }
+         else if(int(str[i]) == 49 && curr == "q4")
+        {
+            cout<<"q4 ";
+            curr="q4";
+        }
+        cout<<" ->";
+        }
+        else
+        {
+            cout<<"String Rejected\n";
+            return 0;
+        }
+    }
+    if(curr==f)
+    {
+        cout<<"String accepted\n";
+    }
+    else
+    {
+        cout<<"String rejected\n";
+    }
+    return 0;
+}
