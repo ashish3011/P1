@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<sys/types.h>
+#include<fcntl.h>
+#include<sys/stat.h>
+#define MODE (S_IRUSR|S_IWUSR)
+int main()
+{
+char buff[1024];
+int rfd,wfd,n,fd;
+pid_t id;
+mkfifo("fifo1",MODE);
+mkfifo("fifo2",MODE);
+id=fork();
+if(id==0)
+{
+rfd=open("fifo1",O_RDONLY);
+wfd=open("fifo2",O_WRONLY);
+read(rfd,buff,1024);
+fd=open(buff,O_RDONLY);
+while((n=read(fd,buff,1024))>0)
+write(wfd,buff,n);
+}
+return 0;
+}
