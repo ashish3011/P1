@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<sys/types.h>
+#include<fcntl.h>
+#include<sys/stat.h>
+#define MODE (S_IRUSR|S_IWUSR)
+int main()
+{
+char buff[1024];
+int rfd,wfd,n;
+pid_t id;
+
+printf("enter file name");
+printf("\n");
+fgets(buff,1024,stdin);
+n=strlen(buff);
+buff[n-1]=0;
+wfd=open("fifo1",O_WRONLY);
+rfd=open("fifo2",O_RDONLY);
+write(wfd,buff,n);
+n=read(rfd,buff,1024);
+write(1,buff,n);
+close(rfd);
+close(wfd);
+unlink("fifo1");
+unlink("fifo2");
+
+}
