@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<unistd.h>
+#include<sys/types.h>
+#include<stdlib.h>
+#include<fcntl.h>
+int main()
+{
+char buff[1024];
+int pfd1[2],pfd2[2],fd,n;
+pid_t id;
+pipe(pfd1);
+pipe(pfd2);
+id=fork();
+if(id==0)
+{
+close(pfd1[1]);
+close(pfd2[0]);
+read(pfd1[0],buff,1024);
+fd=open(buff,O_RDONLY);
+while((n=read(fd,buff,1024))>0)
+{
+write(pfd2[1],buff,n);
+}
+exit(0);
+}
+else
+{
+printf("enter file name ");
+printf("\n");
+fgets(buff,1024,stdin);
+n=strlen(buff);
+buff[n-1]=0;
+write(pfd1[1],buff,n);
+n=read(pfd2[0],buff,1024);
+write(1,buff,n);
+exit(0);
+}
+return 0;
+}
